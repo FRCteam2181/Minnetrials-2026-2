@@ -19,7 +19,9 @@ import frc.robot.commands.DriveCommand;
 // import frc.robot.commands.RollerSpitterCommand;
 // import frc.robot.commands.RollerSuckerCommand;
 import frc.robot.subsystems.CANDriveSubsystem;
-import frc.robot.subsystems.CANRollerSubsystem;
+import frc.robot.subsystems.LinearActuator;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.utils.controllerUtils.compBoardOne.CompBoardOne;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -33,7 +35,9 @@ import frc.robot.subsystems.CANRollerSubsystem;
 public class RobotContainer {
   // The robot's subsystems
   private final CANDriveSubsystem driveSubsystem = new CANDriveSubsystem();
-  private final CANRollerSubsystem rollerSubsystem = new CANRollerSubsystem();
+  private final LinearActuator linearActuator = new LinearActuator();
+  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+  final CompBoardOne compBoardOne;
 
   // The driver's controller
   private final CommandXboxController driverController = new CommandXboxController(
@@ -46,10 +50,17 @@ public class RobotContainer {
   // The autonomous chooser
   private final SendableChooser<Command> autoChooser;
 
+  
+  
+
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    //operator button board
+    this.compBoardOne = CompBoardOne.getInstance();
+
     // Set up command bindings
     configureBindings();
 
@@ -76,6 +87,8 @@ public class RobotContainer {
 
     // autoChooser.addOption("WorstCase", new DriveCommand(() -> 0.5, () -> 0, driveSubsystem).withTimeout(1));
     SmartDashboard.putData(autoChooser);
+
+
   }
 
   /**
@@ -119,9 +132,14 @@ public class RobotContainer {
 
     driverController.a().onTrue(driveSubsystem.resetOdometryCommand(new Pose2d()));
 
-    driverController.x().whileTrue(rollerSubsystem.runRollerSuckerCommand(0.5));
+    driverController.x().whileTrue(linearActuator.ActuatorOut(.25));
 
-    driverController.b().whileTrue(rollerSubsystem.runRollerSpitterCommand(0.5));
+    driverController.b().whileTrue(linearActuator.ActuatorIn(0.25));
+
+    compBoardOne.CompBoardOneButtonR1().whileTrue(elevatorSubsystem.elevatorUp(.1));
+
+    compBoardOne.CompBoardOneButtonL1().whileTrue(elevatorSubsystem.elevatorDown(.1));
+
 
     // Set the default command for the roller subsystem to an instance of
     // RollerCommand with the values provided by the triggers on the operator
@@ -132,6 +150,7 @@ public class RobotContainer {
     //     () -> 0,
     //     () -> 0,
     //     rollerSubsystem));
+ 
   }
 
   /**
