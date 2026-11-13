@@ -55,7 +55,7 @@ public final class Constants {
   }
 
   public static final class RollerConstants {
-    public static final int BOTTOM_ROLLER_MOTOR_ID = 6;
+    public static final int BOTTOM_ROLLER_MOTOR_ID = 12;
     public static final int BOTTOM_ROLLER_MOTOR_CURRENT_LIMIT = 60;
     public static final double BOTTOM_ROLLER_MOTOR_VOLTAGE_COMP = 10;
     public static final double SPITTER_ROLLER_EJECT_VALUE = 0.6;

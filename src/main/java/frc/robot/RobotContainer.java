@@ -20,7 +20,7 @@ import frc.robot.commands.DriveCommand;
 // import frc.robot.commands.RollerSuckerCommand;
 import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.LinearActuator;
-import frc.robot.subsystems.ElevatorSubsystem;
+// import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.utils.controllerUtils.compBoardOne.CompBoardOne;
 
 /**
@@ -36,7 +36,7 @@ public class RobotContainer {
   // The robot's subsystems
   private final CANDriveSubsystem driveSubsystem = new CANDriveSubsystem();
   private final LinearActuator linearActuator = new LinearActuator();
-  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+  // private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   final CompBoardOne compBoardOne;
 
   // The driver's controller
@@ -132,13 +132,13 @@ public class RobotContainer {
 
     driverController.a().onTrue(driveSubsystem.resetOdometryCommand(new Pose2d()));
 
-    driverController.x().whileTrue(linearActuator.ActuatorOut(.25));
+    driverController.leftBumper().whileTrue(linearActuator.ActuatorOut(1.5));
 
-    driverController.b().whileTrue(linearActuator.ActuatorIn(0.25));
+    driverController.rightBumper().whileTrue(linearActuator.ActuatorIn(1.5));
 
-    compBoardOne.CompBoardOneButtonR1().whileTrue(elevatorSubsystem.elevatorUp(.1));
+    // compBoardOne.CompBoardOneButtonR1().whileTrue(elevatorSubsystem.elevatorUp(.1));
 
-    compBoardOne.CompBoardOneButtonL1().whileTrue(elevatorSubsystem.elevatorDown(.1));
+    // compBoardOne.CompBoardOneButtonL1().whileTrue(elevatorSubsystem.elevatorDown(.1));
 
 
     // Set the default command for the roller subsystem to an instance of
