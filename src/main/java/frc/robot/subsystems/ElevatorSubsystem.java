@@ -75,7 +75,7 @@ public class ElevatorSubsystem extends SubsystemBase {
       .withStartingPosition(Meters.of(0.0))
       // Telemetry name and how much to publish.
       .withTelemetry("ElevatorSubsystemMotor", TelemetryVerbosity.HIGH)
-      .withFollowers(Pair.of(elevatorFollower, true));
+      .withFollowers(Pair.of(elevatorFollower, false));
 
   // The SmartMotorController applies the config to the SPARK Flex, which drives one NEO Vortex.
   private final SmartMotorController motor = new SparkWrapper(

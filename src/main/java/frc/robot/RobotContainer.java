@@ -140,9 +140,9 @@ public class RobotContainer {
 
     driverController.rightBumper().whileTrue(linearActuator.ActuatorIn(1.5));
 
-    compBoardOne.CompBoardOneButtonR1().whileTrue(elevatorSubsystem.runTo(Meters.of(0.1), Meters.of(0.01) ));
+    compBoardOne.CompBoardOneButtonR1().whileTrue(elevatorSubsystem.runTo(Meters.of(0.), Meters.of(0.01) ));
 
-    compBoardOne.CompBoardOneButtonL1().whileTrue(elevatorSubsystem.runTo(Meters.of(0.2), Meters.of(0.01)));
+    compBoardOne.CompBoardOneButtonL1().whileTrue(elevatorSubsystem.runTo(Meters.of(0.6), Meters.of(0.01)));
 
 
     // Set the default command for the roller subsystem to an instance of
